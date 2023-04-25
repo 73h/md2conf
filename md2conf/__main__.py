@@ -9,7 +9,6 @@ from .application import synchronize_page
 class Arguments(argparse.Namespace):
     mdfile: str
     domain: str
-    username: str
     apikey: str
     space: str
     loglevel: str
@@ -19,7 +18,6 @@ parser = argparse.ArgumentParser()
 parser.prog = os.path.basename(os.path.dirname(__file__))
 parser.add_argument("mdfile", help="Markdown file to convert and publish.")
 parser.add_argument("-d", "--domain", help="Confluence organization domain.")
-parser.add_argument("-u", "--username", help="Confluence user name.")
 parser.add_argument(
     "-a",
     "--apikey",
@@ -55,5 +53,5 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(funcName)s [%(lineno)d] - %(message)s",
 )
 
-with ConfluenceAPI(args.domain, args.username, args.apikey, args.space) as api:
+with ConfluenceAPI(args.domain, args.apikey, args.space) as api:
     synchronize_page(api, args.mdfile)
