@@ -68,7 +68,7 @@ class ConfluencePage:
 class ConfluenceAPI:
     domain: str
     space_key: str
-    user_name: str
+    #user_name: str
     api_key: str
 
     session: Optional["ConfluenceSession"] = None
@@ -76,19 +76,19 @@ class ConfluenceAPI:
     def __init__(
         self,
         domain: Optional[str] = None,
-        user_name: Optional[str] = None,
+        #user_name: Optional[str] = None,
         api_key: Optional[str] = None,
         space_key: Optional[str] = None,
     ) -> None:
         opt_domain = domain or os.getenv("CONFLUENCE_DOMAIN")
-        opt_user_name = user_name or os.getenv("CONFLUENCE_USER_NAME")
+        #opt_user_name = user_name or os.getenv("CONFLUENCE_USER_NAME")
         opt_api_key = api_key or os.getenv("CONFLUENCE_API_KEY")
         opt_space_key = space_key or os.getenv("CONFLUENCE_SPACE_KEY")
 
         if not opt_domain:
             raise ConfluenceError("Confluence domain not specified")
-        if not opt_user_name:
-            raise ConfluenceError("Confluence user name not specified")
+        #if not opt_user_name:
+            #raise ConfluenceError("Confluence user name not specified")
         if not opt_api_key:
             raise ConfluenceError("Confluence API key not specified")
         if not opt_space_key:
@@ -100,7 +100,7 @@ class ConfluenceAPI:
             )
 
         self.domain = opt_domain
-        self.user_name = opt_user_name
+        #self.user_name = opt_user_name
         self.api_key = opt_api_key
         self.space_key = opt_space_key
 
@@ -125,11 +125,13 @@ class ConfluenceSession:
     session: requests.Session
     domain: str
     space_key: str
+    api_key: str
 
-    def __init__(self, session: requests.Session, domain: str, space_key: str) -> None:
+    def __init__(self, session: requests.Session, domain: str, space_key: str, api_key: str) -> None:
         self.session = session
         self.domain = domain
         self.space_key = space_key
+        self.api_key = api_key
 
     def close(self) -> None:
         self.session.close()
