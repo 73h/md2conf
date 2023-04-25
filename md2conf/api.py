@@ -144,7 +144,7 @@ class ConfluenceSession:
             self.space_key = old_space_key
 
     def _build_url(self, path: str, query: Optional[Dict[str, str]] = None) -> str:
-        base_url = f"https://{self.domain}/wiki/rest/api{path}"
+        base_url = f"https://{self.domain}/rest/api{path}"
         return build_url(base_url, query)
 
     def _invoke(self, path: str, query: Dict[str, str]) -> JsonType:
