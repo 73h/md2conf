@@ -107,7 +107,7 @@ class ConfluenceAPI:
     def __enter__(self) -> "ConfluenceSession":
         session = requests.Session()
         #session.auth = (self.user_name, self.api_key)
-        self.session = ConfluenceSession(session, self.domain, self.space_key)
+        self.session = ConfluenceSession(session, self.domain, self.space_key, self.api_key)
         return self.session
 
     def __exit__(
