@@ -262,7 +262,7 @@ class ConfluenceDocument:
         self.root = elements_from_strings(
             [
                 '<ac:structured-macro ac:name="info" ac:schema-version="1">',
-                "<ac:rich-text-body><p>This page has been generated with a tool.</p></ac:rich-text-body>",
+                "<ac:rich-text-body><p>This page has been generated with gitlab.</p></ac:rich-text-body>",
                 "</ac:structured-macro>",
                 html,
             ]
