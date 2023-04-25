@@ -310,13 +310,13 @@ class ConfluenceSession:
     def update_page(self, page_id: str, new_content: str) -> None:
         page = self.get_page(page_id)
 
-        try:
-            old_content = sanitize_confluence(page.content)
-            if old_content == new_content:
-                LOGGER.info("Up-to-date page: %s", page_id)
-                return
-        except ParseError:
-            pass
+        #try:
+        #    old_content = sanitize_confluence(page.content)
+        #    if old_content == new_content:
+        #        LOGGER.info("Up-to-date page: %s", page_id)
+        #        return
+        #except ParseError:
+        #    pass
 
         path = f"/content/{page_id}"
         data = {
