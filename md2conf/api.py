@@ -106,7 +106,7 @@ class ConfluenceAPI:
 
     def __enter__(self) -> "ConfluenceSession":
         session = requests.Session()
-        session.auth = (self.user_name, self.api_key)
+        #session.auth = (self.user_name, self.api_key)
         self.session = ConfluenceSession(session, self.domain, self.space_key)
         return self.session
 
@@ -149,7 +149,7 @@ class ConfluenceSession:
 
     def _invoke(self, path: str, query: Dict[str, str]) -> JsonType:
         url = self._build_url(path, query)
-        response = self.session.get(url)
+        response = self.session.get(url. headers={"Authorization": f"Bearer {self.api_key}"})
         response.raise_for_status()
         return response.json()
 
@@ -158,7 +158,7 @@ class ConfluenceSession:
         response = self.session.put(
             url,
             data=json.dumps(data),
-            headers={"Content-Type": "application/json"},
+            headers={"Content-Type": "application/json", "Authorization": f"Bearer {self.api_key}"},
         )
         response.raise_for_status()
 
@@ -222,7 +222,7 @@ class ConfluenceSession:
             response = self.session.post(
                 url,
                 files=file_to_upload,  # type: ignore
-                headers={"X-Atlassian-Token": "no-check"},
+                headers={"X-Atlassian-Token": "no-check", "Authorization": f"Bearer {self.api_key}"},
             )
 
         response.raise_for_status()
