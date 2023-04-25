@@ -149,7 +149,7 @@ class ConfluenceSession:
 
     def _invoke(self, path: str, query: Dict[str, str]) -> JsonType:
         url = self._build_url(path, query)
-        response = self.session.get(url. headers={"Authorization": f"Bearer {self.api_key}"})
+        response = self.session.get(url, headers={"Authorization": f"Bearer {self.api_key}"})
         response.raise_for_status()
         return response.json()
 
